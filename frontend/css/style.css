@@ -291,6 +291,13 @@ img {
   margin-top: 0.75rem;
 }
 
+.field-label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--brand-700);
+  margin-bottom: -0.25rem;
+}
+
 .form-error {
   font-size: 0.875rem;
   font-weight: 600;

@@ -1,8 +1,9 @@
 import { api, setToken } from "./api.js";
 import { maskPhone } from "./masks.js";
+import { safeReturnTo } from "./login-navigation.js";
 
 const params = new URLSearchParams(window.location.search);
-const returnTo = params.get("returnTo") || "home.html";
+const returnTo = safeReturnTo(params.get("returnTo"));
 
 if (returnTo === "agendamentos.html") {
   document.getElementById("returnHint").style.display = "block";
@@ -24,7 +25,7 @@ form.addEventListener("submit", async (e) => {
   const name = document.getElementById("name").value;
   const digits = document.getElementById("phone").value.replace(/\D/g, "");
 
-  if (digits.length < 10) {
+  if (digits.length < 10 || digits.length > 13) {
     errorEl.textContent = "Informe um telefone válido com DDD.";
     errorEl.style.display = "block";
     return;
