@@ -14,7 +14,7 @@ frontend/   Site estático em HTML, CSS e JavaScript
 
 ## Como executar
 
-Requisitos: Node.js 18 ou superior e MySQL/MariaDB.
+Requisitos: Node.js 22 ou superior e MySQL/MariaDB.
 
 ```bash
 cd backend
