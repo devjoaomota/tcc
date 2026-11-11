@@ -7,8 +7,10 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
+    "test": "node --test \"tests/*.test.js\"",
     "seed": "node db/seed.js",
-    "seed:demo": "node scripts/seed-demo.js --confirm"
+    "seed:demo": "node scripts/seed-demo.js --confirm",
+    "avaliacao": "node scripts/avaliacao-qualidade.js"
   },
   "engines": {
     "node": ">=18"

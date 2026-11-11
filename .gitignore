@@ -7,3 +7,4 @@ backend/uploads/*
 *.log
 .DS_Store
 Thumbs.db
+backend/avaliacao/
