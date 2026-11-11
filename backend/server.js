@@ -16,6 +16,7 @@ import adminRoutes from "./routes/admin.js";
 import { customerPackageRoutes, adminPackageRoutes } from "./routes/packages.js";
 import { initDatabase } from "./db/database.js";
 import { seed } from "./db/seed.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const uploadsDir = path.join(__dirname, "uploads");
@@ -59,13 +60,9 @@ app.use("/api", vaccinesRoutes);
 
 app.use((req, res) => res.status(404).json({ error: "Rota nao encontrada." }));
 
-app.use((err, req, res, next) => {
-  // Erros de validacao (ex: upload que nao e imagem, arquivo grande demais no
-  // multer) sao culpa da requisicao: 400. O resto e erro interno: 500.
-  const status = err.status || (err.name === "MulterError" ? 400 : 500);
-  if (status === 500) console.error(err);
-  res.status(status).json({ error: err.message || "Erro interno do servidor." });
-});
+// Erros da requisicao (4xx) mantem a mensagem publica; falhas internas
+// sao registradas no log e respondidas com uma mensagem generica.
+app.use(errorHandler);
 
 const PORT = process.env.PORT_SERVER || process.env.PORT || 3333;
 app.listen(PORT, () => {
